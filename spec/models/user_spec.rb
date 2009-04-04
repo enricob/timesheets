@@ -15,7 +15,5 @@ describe User do
     }
   end
 
-  it "should create a new instance given valid attributes" do
-    User.create!(@valid_attributes)
-  end
+  # No specs for the User model, since it is exactly the Authlogic User model
 end
