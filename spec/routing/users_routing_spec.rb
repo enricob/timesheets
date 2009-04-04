@@ -59,5 +59,21 @@ describe UsersController do
     it "generates params for #destroy" do
       params_from(:delete, "/users/1").should == {:controller => "users", :action => "destroy", :id => "1"}
     end
+    
+    it "generates params for #show through account" do
+      params_from(:get, "/account").should == {:controller => "users", :action => "show"}
+    end
+    
+    it "generates params for #update through account" do
+      params_from(:put, "/account").should == {:controller => "users", :action => "update"}
+    end
+    
+    it "generates params for #destroy through account" do
+      params_from(:delete, "/account").should == {:controller => "users", :action => "destroy"}
+    end
+    
+    it "generates params for #create through account" do
+      params_from(:post, "/account").should == {:controller => "users", :action => "create"}
+    end
   end
 end
