@@ -4,7 +4,7 @@ describe UserSessionsController do
 
   it "should respond to new with login page" do
     get 'new'
-    response.should render_template("views/user_session/new.html.erb")
+    response.should render_template("user_sessions/new.html.erb")
   end
 
 end
