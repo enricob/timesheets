@@ -1,19 +1,16 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe User do
+  fixtures :users
+  
   before(:each) do
-    @valid_attributes = {
-      :login => "value for login",
-      :crypted_password => "value for crypted_password",
-      :password_salt => "value for password_salt",
-      :persistence_token => "value for persistence_token",
-      :login_count => 1,
-      :last_request_at => Time.now,
-      :last_login_at => Time.now,
-      :current_login_at => Time.now,
-      :last_login_ip => "value for last_login_ip"
-    }
+    @ben = users(:ben)
+    @zack = users(:zack)
   end
-
-  # No specs for the User model, since it is exactly the Authlogic User model
+  
+  # Just check to make sure we declared "acts_as_authentic"
+  it "should act as authentic" do
+    @ben.respond_to?(:password=)
+    @ben.respond_to?(:valid_password?)
+  end
 end
