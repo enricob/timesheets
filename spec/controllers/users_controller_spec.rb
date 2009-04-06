@@ -10,6 +10,20 @@ describe UsersController do
     @zack = users(:zack)
     activate_authlogic
   end
+  
+  it "should reject new requests for a logged in user" do
+    UserSession.create(@ben)
+    get 'new'
+    response.should redirect_to("/account")
+    assert flash[:notice] == "You must be logged out to access this page"
+  end
+  
+  it "should reject create requests for a logged in user" do
+    UserSession.create(@zack)
+    post 'create'
+    response.should redirect_to("/account")
+    assert flash[:notice] == "You must be logged out to access this page"
+  end
 
   it "should reject show requests if there is no session" do
     get 'show'
@@ -24,6 +38,11 @@ describe UsersController do
   it "should reject update if there is no session" do
     post 'update'
     response.should redirect_to("/session/new")
+  end
+  
+  it "should respond to new with new.html.erb if there's no user logged in" do
+    get 'new'
+    response.should render_template('users/new.html.erb')
   end
   
   it "should respond to show with show.html.erb for logged in user" do
