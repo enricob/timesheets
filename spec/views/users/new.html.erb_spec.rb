@@ -4,27 +4,22 @@ describe "/users/new.html.erb" do
   include UsersHelper
   
   before(:each) do
-    assigns[:user] = stub_model(User,
+    assigns[:user] = @user = stub_model(User,
       :new_record? => true,
-      :login => "value for login",
-      :crypted_password => "value for crypted_password",
-      :password_salt => "value for password_salt",
-      :persistence_token => "value for persistence_token",
-      :login_count => 1,
-      :last_login_ip => "value for last_login_ip"
+      :login => "testuser",
+      :password_salt => (salt = Authlogic::Random.hex_token),
+      :crypted_password => Authlogic::CryptoProviders::Sha512.encrypt("testuser" + salt),
+      :persistence_token => Authlogic::Random.hex_token
     )
   end
 
-  it "renders new user form" do
+  it "renders the new user form" do
     render
     
-    response.should have_tag("form[action=?][method=post]", users_path) do
-      with_tag("input#user_login[name=?]", "user[login]")
-      with_tag("input#user_crypted_password[name=?]", "user[crypted_password]")
-      with_tag("input#user_password_salt[name=?]", "user[password_salt]")
-      with_tag("input#user_persistence_token[name=?]", "user[persistence_token]")
-      with_tag("input#user_login_count[name=?]", "user[login_count]")
-      with_tag("input#user_last_login_ip[name=?]", "user[last_login_ip]")
+    response.should have_tag("form[action='/account'][method='post']") do
+      with_tag('input#user_login[name=?]', "user[login]")
+      with_tag('input#user_password[name=?][type=?]', "user[password]", "password")
+      with_tag('input#user_password_confirmation[name=?][type=?]', "user[password_confirmation]", "password")
     end
   end
 end
