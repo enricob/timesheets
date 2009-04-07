@@ -6,6 +6,12 @@ require 'spec/autorun'
 require 'spec/rails'
 require 'shoulda'
 
+require 'dataset'
+ class Test::Unit::TestCase
+   include Dataset
+   datasets_directory "#{RAILS_ROOT}/spec/datasets"
+ end
+
 Spec::Runner.configure do |config|
   # If you're not using ActiveRecord you should remove these
   # lines, delete config/database.yml and disable :active_record
