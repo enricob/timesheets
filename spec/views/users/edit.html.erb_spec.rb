@@ -16,7 +16,7 @@ describe "/users/edit.html.erb" do
   it "renders the edit user form" do
     render
     
-    response.should have_tag("form[action=#{user_path(@user)}][method=post]") do
+    response.should have_tag("form[action='/account'][method=post]") do
       with_tag('input#user_login[name=?]', "user[login]")
       with_tag('input#user_password[name=?][type=?]', "user[password]", "password")
       with_tag('input#user_password_confirmation[name=?][type=?]', "user[password_confirmation]", "password")
