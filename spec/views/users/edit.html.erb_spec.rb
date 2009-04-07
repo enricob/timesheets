@@ -6,12 +6,10 @@ describe "/users/edit.html.erb" do
   before(:each) do
     assigns[:user] = @user = stub_model(User,
       :new_record? => false,
-      :login => "value for login",
-      :crypted_password => "value for crypted_password",
-      :password_salt => "value for password_salt",
-      :persistence_token => "value for persistence_token",
-      :login_count => 1,
-      :last_login_ip => "value for last_login_ip"
+      :login => "testuser",
+      :password_salt => (salt = Authlogic::Random.hex_token),
+      :crypted_password => Authlogic::CryptoProviders::Sha512.encrypt("testuser" + salt),
+      :persistence_token => Authlogic::Random.hex_token
     )
   end
 
@@ -20,13 +18,8 @@ describe "/users/edit.html.erb" do
     
     response.should have_tag("form[action=#{user_path(@user)}][method=post]") do
       with_tag('input#user_login[name=?]', "user[login]")
-      with_tag('input#user_crypted_password[name=?]', "user[crypted_password]")
-      with_tag('input#user_password_salt[name=?]', "user[password_salt]")
-      with_tag('input#user_persistence_token[name=?]', "user[persistence_token]")
-      with_tag('input#user_login_count[name=?]', "user[login_count]")
-      with_tag('input#user_last_login_ip[name=?]', "user[last_login_ip]")
+      with_tag('input#user_password[name=?][type=?]', "user[password]", "password")
+      with_tag('input#user_password_confirmation[name=?][type=?]', "user[password_confirmation]", "password")
     end
   end
 end
-
-
