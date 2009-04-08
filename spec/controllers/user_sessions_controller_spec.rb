@@ -15,7 +15,7 @@ describe UserSessionsController do
         UserSession.create(users(:ben))
       end
       
-      it "should redirect to account page" do
+      it "redirects to account page" do
         get 'new'
         response.should redirect_to(account_path)
       end
