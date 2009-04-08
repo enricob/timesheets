@@ -22,4 +22,9 @@ describe "/users/edit.html.erb" do
       with_tag('input#user_password_confirmation[name=?][type=?]', "user[password_confirmation]", "password")
     end
   end
+  
+  it "renders the form partial" do
+    template.should_receive(:render).with(hash_including(:partial => "form"))
+    render
+  end
 end
