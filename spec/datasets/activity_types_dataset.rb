@@ -4,7 +4,7 @@ class ActivityTypesDataset < Dataset::Base
   def load
     create_record :activity_type, :design,
       :name => "design",
-      :description => "Software Design and Modeling tasks"
+      :description => "Software Design and Modeling tasks",
       :project_id => projects(:project_x).id
     
     create_record :activity_type, :dev,
