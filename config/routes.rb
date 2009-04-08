@@ -1,6 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
-  map.resource :account, :controller => "users"
-  map.resources :users
+  map.resource :account, :controller => "users", :except => [:index, :destroy]
+  map.resources :users, :except => [:index, :destroy]
 
   map.resource :user_session, :as => "session", :except => "edit"
   map.root :controller => "user_sessions", :action => "new"

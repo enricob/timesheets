@@ -2,10 +2,6 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe UsersController do
   describe "route generation" do
-    it "maps #index" do
-      route_for(:controller => "users", :action => "index").should == "/users"
-    end
-  
     it "maps #new" do
       route_for(:controller => "users", :action => "new").should == "/users/new"
     end
@@ -25,17 +21,9 @@ describe UsersController do
     it "maps #update" do
       route_for(:controller => "users", :action => "update", :id => "1").should == {:path =>"/users/1", :method => :put}
     end
-  
-      it "maps #destroy" do
-        route_for(:controller => "users", :action => "destroy", :id => "1").should == {:path =>"/users/1", :method => :delete}
-      end
-    end
+  end
 
   describe "route recognition" do
-    it "generates params for #index" do
-      params_from(:get, "/users").should == {:controller => "users", :action => "index"}
-    end
-  
     it "generates params for #new" do
       params_from(:get, "/users/new").should == {:controller => "users", :action => "new"}
     end
@@ -55,10 +43,6 @@ describe UsersController do
     it "generates params for #update" do
       params_from(:put, "/users/1").should == {:controller => "users", :action => "update", :id => "1"}
     end
-  
-    it "generates params for #destroy" do
-      params_from(:delete, "/users/1").should == {:controller => "users", :action => "destroy", :id => "1"}
-    end
     
     it "generates params for #new through account" do
       params_from(:get, "/account/new").should == {:controller => "users", :action => "new"}
@@ -74,10 +58,6 @@ describe UsersController do
     
     it "generates params for #update through account" do
       params_from(:put, "/account").should == {:controller => "users", :action => "update"}
-    end
-    
-    it "generates params for #destroy through account" do
-      params_from(:delete, "/account").should == {:controller => "users", :action => "destroy"}
     end
     
     it "generates params for #create through account" do
