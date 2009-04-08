@@ -1,4 +1,6 @@
 class ActivityTypesController < ApplicationController
+  before_filter :require_user
+  
   # GET /activity_types
   # GET /activity_types.xml
   def index
