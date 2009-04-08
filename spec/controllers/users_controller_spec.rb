@@ -3,7 +3,6 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 require 'authlogic/test_case'
 
 describe UsersController do
-  #fixtures :users
   dataset :users
   
   before(:each) do
