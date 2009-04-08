@@ -9,7 +9,7 @@ class UsersDataset < Dataset::Base
       salt = Authlogic::Random.hex_token
       create_record :user, attributes[:login].to_sym,
         :login => attributes[:login],
-        :password_salt => Authlogic::Random.hex_token,
+        :password_salt => salt,
         :crypted_password => Authlogic::CryptoProviders::Sha512.encrypt(attributes[:password] + salt),
         :persistence_token => Authlogic::Random.hex_token
     end
