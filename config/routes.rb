@@ -1,4 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :projects
+
   map.resource :account, :controller => "users", :except => [:index, :destroy]
   map.resources :users, :except => [:index, :destroy]
 
