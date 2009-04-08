@@ -18,18 +18,18 @@ describe UsersController do
       route_for(:controller => "users", :action => "edit", :id => "1").should == "/users/1/edit"
     end
 
-  it "maps #create" do
-    route_for(:controller => "users", :action => "create").should == {:path => "/users", :method => :post}
-  end
-
-  it "maps #update" do
-    route_for(:controller => "users", :action => "update", :id => "1").should == {:path =>"/users/1", :method => :put}
-  end
-  
-    it "maps #destroy" do
-      route_for(:controller => "users", :action => "destroy", :id => "1").should == {:path =>"/users/1", :method => :delete}
+    it "maps #create" do
+      route_for(:controller => "users", :action => "create").should == {:path => "/users", :method => :post}
     end
-  end
+
+    it "maps #update" do
+      route_for(:controller => "users", :action => "update", :id => "1").should == {:path =>"/users/1", :method => :put}
+    end
+  
+      it "maps #destroy" do
+        route_for(:controller => "users", :action => "destroy", :id => "1").should == {:path =>"/users/1", :method => :delete}
+      end
+    end
 
   describe "route recognition" do
     it "generates params for #index" do
@@ -58,6 +58,14 @@ describe UsersController do
   
     it "generates params for #destroy" do
       params_from(:delete, "/users/1").should == {:controller => "users", :action => "destroy", :id => "1"}
+    end
+    
+    it "generates params for #new through account" do
+      params_from(:get, "/account/new").should == {:controller => "users", :action => "new"}
+    end
+    
+    it "generates params for #edit through account" do
+      params_from(:get, "/account/edit").should == {:controller => "users", :action => "edit"}
     end
     
     it "generates params for #show through account" do
