@@ -11,4 +11,6 @@ describe Project do
   it "should create a new instance given valid attributes" do
     Project.create!(@valid_attributes)
   end
+  
+  it { should validate_presence_of(:name) }
 end
