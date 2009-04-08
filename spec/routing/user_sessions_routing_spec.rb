@@ -20,6 +20,14 @@ describe UserSessionsController do
       params_from(:get, "/").should == {:controller => "user_sessions", :action => "new"}
     end
     
+    it "recognizes '/login' as #new" do
+      params_from(:get, "/login").should == {:controller => "user_sessions", :action => "new"}
+    end
+    
+    it "recognizes '/logout' as #destroy" do
+      params_from(:get, "/logout").should == {:controller => "user_sessions", :action => "destroy"}
+    end
+    
     it "generates params for #new" do
       params_from(:get, "/session/new").should == {:controller => "user_sessions", :action => "new"}
     end
