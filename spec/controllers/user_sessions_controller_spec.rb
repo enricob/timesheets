@@ -1,17 +1,31 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
-require "authlogic/test_case"
+
+require 'authlogic/test_case'
 
 describe UserSessionsController do
+  dataset :users
+  
   before(:each) do
     activate_authlogic
   end
   
-  it "should respond to new with login page" do
-    get 'new'
-    response.should render_template("user_sessions/new.html.erb")
-  end
-  
-  it "should not have a current user if nobody logged in" do
-    assert_nil @current_user
+  describe "GET new" do
+    describe "with logged in user" do
+      before(:each) do
+        UserSession.create(users(:ben))
+      end
+      
+      it "should redirect to account page" do
+        get 'new'
+        response.should redirect_to(account_path)
+      end
+    end
+    
+    describe "with no logged in user" do
+      it "renders login page" do
+        get 'new'
+        response.should render_template("user_sessions/new.html.erb")
+      end
+    end
   end
 end
