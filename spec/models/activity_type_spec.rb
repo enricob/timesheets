@@ -11,4 +11,7 @@ describe ActivityType do
   it "should create a new instance given valid attributes" do
     ActivityType.create!(@valid_attributes)
   end
+  
+  it { should validate_presence_of(:name) }
+  it { should belong_to(:project) }
 end
