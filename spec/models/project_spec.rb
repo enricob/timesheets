@@ -19,8 +19,9 @@ describe Project do
   
   it "should accept nested attributes values for activity types" do
     test_proj = projects(:project_x)
-    new_attributes = {:activity_types_attributes => {"3" => {:name => "QA", :description => "QA Tasks"}}}
+    new_attributes = {:activity_types_attributes => {"2" => {:name => "QA", :description => "QA Tasks"}}}
     assert test_proj.update_attributes!(new_attributes)
     # The above should throw an exception if Projects do not accept nested attribute values
+    # I won't test whether the values are actually updated since that's ActiveRecord's responsibility
   end
 end
