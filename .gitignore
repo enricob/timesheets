@@ -10,3 +10,4 @@ db/cstore/**
 coverage/*
 db/*.sqlite3
 *.tmproj
+doc/**
