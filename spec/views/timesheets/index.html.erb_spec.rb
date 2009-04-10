@@ -6,12 +6,17 @@ describe "/timesheets/index.html.erb" do
   before(:each) do
     assigns[:user] = @user = stub_model(User)
     @user.timesheets.create(:start_date => Date.new(2009, 4, 6),
-      :time_entries_attributes => [{:hours => 8}])
+      :time_entries_attributes => [{:hours => 2}, {:hours => 6}])
   end
   
   it "should render the user's timesheets" do
     render
-    response.should have_tag("tr>td", "April 6, 2009")
+    response.should have_tag("tr>td", "April  6, 2009")
     response.should have_tag("tr>td", "8")
+  end
+  
+  it "should contain a link to manage projects" do
+    render
+    response.should have_tag("a[href=?]", "#{projects_path}")
   end
 end

@@ -8,7 +8,15 @@
   
 <% for timesheet in @user.timesheets do %>
   <tr>
-    <td><%=h timesheet.start_date %></td>
+    <td><%=h timesheet.start_date.to_date.to_s(:long) %></td>
     <td><%=h timesheet.time_entries.inject(0) { |sum, t| sum + t.hours } %></td>
   </tr>
 <% end %>
+</table>
+
+<hr/>
+
+<p>
+  <%= link_to "Manage Projects", projects_path %> | 
+  <%= link_to "Current Week", "#" %>
+</p>
