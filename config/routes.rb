@@ -1,6 +1,4 @@
 ActionController::Routing::Routes.draw do |map|
-  map.resources :activity_types
-
   map.resources :projects
 
   map.resource :account, :controller => "users", :except => [:index, :destroy]
