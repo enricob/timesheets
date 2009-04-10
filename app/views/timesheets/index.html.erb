@@ -1,15 +1,16 @@
 <% title "Timesheets: My Timesheets" %>
 
-<table>
+<table style="width: 45%">
   <tr>
-    <th>Week Starting</th>
-    <th>Hours Logged</th>
+    <th style="text-align: left">Week</th>
+    <th style="text-align: left">Hours</th>
   </tr>
   
 <% for timesheet in @user.timesheets do %>
   <tr>
     <td><%=h timesheet.start_date.to_date.to_s(:long) %></td>
     <td><%=h timesheet.time_entries.inject(0) { |sum, t| sum + t.hours } %></td>
+    <td><%= link_to "Edit", "#" %></td>
   </tr>
 <% end %>
 </table>
@@ -18,5 +19,5 @@
 
 <p>
   <%= link_to "Manage Projects", projects_path %> | 
-  <%= link_to "Current Week", "#" %>
+  <%= link_to "Current Week", "/timesheets/#{date_path(this_week)}" %>
 </p>

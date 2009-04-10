@@ -16,6 +16,8 @@ a { color: #000; }
 a:visited { color: #666; }
 a:hover { color: #fff; background-color:#000; }
 
+hr { width: 80%; margin-left: 0; }
+
 .fieldWithErrors {
   padding: 2px;
   background-color: red;
