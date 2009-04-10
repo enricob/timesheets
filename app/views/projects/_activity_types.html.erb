@@ -1,0 +1,11 @@
+<div class="activity_type">
+  <p>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+    <%= f.label :description %>
+    <%= f.text_field :description %>
+    <% unless f.object.new_record? %>
+      <%= link_to "Remove", "#activity_type", :class => "remove" %>
+    <% end %>
+  </p>
+</div>
