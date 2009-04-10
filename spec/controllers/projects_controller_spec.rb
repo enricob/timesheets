@@ -8,6 +8,10 @@ describe ProjectsController do
   before(:each) do
     activate_authlogic
   end
+  
+  def mock_activity_type(stubs={})
+    @mock_activity_type ||= mock_model(ActivityType, stubs)
+  end
 
   def mock_project(stubs={})
     @mock_project ||= mock_model(Project, stubs)
@@ -79,8 +83,10 @@ describe ProjectsController do
         UserSession.create(users(:ben))
       end
     
-      it "exposes a new project as @project" do
+      it "exposes a new project as @project with a blank activity type" do
         Project.should_receive(:new).and_return(mock_project)
+        mock_project.should_receive(:activity_types).and_return(mock_array = [])
+        mock_array.should_receive(:build).and_return(mock_activity_type)
         get :new
         assigns[:project].should equal(mock_project)
       end
