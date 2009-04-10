@@ -1,7 +1,7 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe Timesheet do
-  dataset :users
+  dataset :users, :timesheets, :time_entries
   
   before(:each) do
     @valid_attributes = {
@@ -21,5 +21,24 @@ describe Timesheet do
     @valid_attributes.merge(:start_date => Date.new(2009,4,6))
     timesheet = Timesheet.create!(@valid_attributes)
     timesheet.should have(1).error_on(:start_date)
+  end
+  
+  it "should accept nested attributes values for time entries" do
+    test_sheet = timesheets(:ben1)
+    new_attributes = {:time_entries_attributes => [{:id => test_sheet.time_entries.first.id, :hours => "2"}]}
+    test_sheet.update_attributes!(new_attributes)
+    test_sheet.time_entries.first.hours.should == 2
+  end
+  
+  it "should allow destruction of time entries via nested values" do
+    test_sheet = timesheets(:ben1)
+    new_attributes = {:time_entries_attributes => [{:id => test_sheet.time_entries.first.id, "_delete" => "1"}]}
+    test_sheet.update_attributes(new_attributes)
+    assert test_sheet.time_entries.count.should == 1
+  end
+  
+  it "should destroy its time entries when it is deleted" do
+    timesheets(:ben1).destroy
+    TimeEntry.all.length.should == 2
   end
 end
