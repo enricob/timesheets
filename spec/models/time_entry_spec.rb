@@ -6,10 +6,8 @@ describe TimeEntry do
   before(:each) do
     @valid_attributes = {
       :entry_date => Time.now,
-      :user => users(:ben),
-      :project => projects(:project_x),
-      :hours => 1,
       :activity_type => activity_types(:dev),
+      :hours => 1,
       :description => "value for description"
     }
   end
@@ -19,4 +17,5 @@ describe TimeEntry do
   end
   
   it { should belong_to(:timesheet) }
+  it { should belong_to(:activity_type) }
 end

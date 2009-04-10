@@ -3,10 +3,8 @@ class CreateTimeEntries < ActiveRecord::Migration
     create_table :time_entries do |t|
       t.references :timesheet
       t.datetime :entry_date
-      t.references :user
-      t.references :project
-      t.integer :hours
       t.references :activity_type
+      t.integer :hours
       t.string :description
 
       t.timestamps
