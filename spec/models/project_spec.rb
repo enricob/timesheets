@@ -19,16 +19,20 @@ describe Project do
   
   it "should accept nested attributes values for activity types" do
     test_proj = projects(:project_x)
-    new_attributes = {:activity_types_attributes => {activity_types(:test).id.to_s => {:name => "QA", :description => "QA Tasks"}}}
-    assert test_proj.update_attributes!(new_attributes)
-    # The above should throw an exception if Projects do not accept nested attribute values
-    # I won't test whether the values are actually updated since that's ActiveRecord's responsibility
+    new_attributes = {:activity_types_attributes => [{:id => test_proj.activity_types.first.id, :name => "Stuff"}]}
+    test_proj.update_attributes(new_attributes)
+    test_proj.activity_types.first.name.should == "Stuff"
   end
   
   it "should allow destruction of activity types via nested values" do
     test_proj = projects(:project_x)
     new_attributes = {:activity_types_attributes => [{:id => activity_types(:test).id.to_s, "_delete" => "1"}]}
-    test_proj.update_attributes!(new_attributes)
+    test_proj.update_attributes(new_attributes)
     assert test_proj.activity_types.count.should == 2
+  end
+  
+  it "should destroy its activity types when it is deleted" do
+    projects(:project_x).destroy
+    ActivityType.all.length.should == 2
   end
 end
