@@ -1,7 +1,5 @@
 // Place your application-specific JavaScript functions and classes here
 // This file is automatically included by javascript_include_tag :defaults
-// Place your application-specific JavaScript functions and classes here
-// This file is automatically included by javascript_include_tag :defaults
 replace_ids = function(s){
   var new_id = new Date().getTime();
   return s.replace(/NEW_RECORD/g, new_id);
@@ -24,5 +22,5 @@ var myrules = {
 };
 
 Event.observe(window, 'load', function(){
-  $('container').delegate('click', myrules);
+  $('page').delegate('click', myrules);
 });
