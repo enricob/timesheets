@@ -1,5 +1,14 @@
 <% title "Timesheets: My Timesheets" %>
 
+<table>
+  <tr>
+    <th>Week Starting</th>
+    <th>Hours Logged</th>
+  </tr>
+  
 <% for timesheet in @user.timesheets do %>
-  <p>Start Date: <%= timesheet.start_date %></p>
+  <tr>
+    <td><%=h timesheet.start_date %></td>
+    <td><%=h timesheet.time_entries.inject(0) { |sum, t| sum + t.hours } %></td>
+  </tr>
 <% end %>
