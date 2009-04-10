@@ -1,3 +1,5 @@
 <% title "Timesheets: My Timesheets" %>
 
-<p>Placeholder Index Page</p>
+<% for timesheet in @user.timesheets do %>
+  <p>Start Date: <%= timesheet.start_date %></p>
+<% end %>
