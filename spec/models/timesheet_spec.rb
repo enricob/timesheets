@@ -5,7 +5,7 @@ describe Timesheet do
   
   before(:each) do
     @valid_attributes = {
-      :start_date => Time.now,
+      :start_date => Date.new(2009,4,6),
       :user => users(:ben)
     }
   end
@@ -16,4 +16,10 @@ describe Timesheet do
   
   it { should belong_to(:user) }
   it { should have_many(:time_entries) }
+  
+  it "should verify that start_date is a Monday" do
+    @valid_attributes.merge(:start_date => Date.new(2009,4,6))
+    timesheet = Timesheet.create!(@valid_attributes)
+    timesheet.should have(1).error_on(:start_date)
+  end
 end
