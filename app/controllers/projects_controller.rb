@@ -27,6 +27,7 @@ class ProjectsController < ApplicationController
   # GET /projects/new.xml
   def new
     @project = Project.new
+    @project.activity_types.build
 
     respond_to do |format|
       format.html # new.html.erb
