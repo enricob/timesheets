@@ -15,11 +15,7 @@ describe UserSessionsController do
     end
   end
   
-  describe "route recognition" do
-    it "recognizes '/' as #new" do
-      params_from(:get, "/").should == {:controller => "user_sessions", :action => "new"}
-    end
-    
+  describe "route recognition" do    
     it "recognizes '/login' as #new" do
       params_from(:get, "/login").should == {:controller => "user_sessions", :action => "new"}
     end
