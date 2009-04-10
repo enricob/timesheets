@@ -18,7 +18,11 @@ describe TimeEntry do
   
   it { should belong_to(:timesheet) }
   it { should belong_to(:activity_type) }
-  it { should validate_presence_of(:activity_type) }
+  it { should validate_presence_of(:activity_type).with_message("must be selected") }
   it { should validate_numericality_of(:hours) }
-  it { should ensure_inclusion_of(:hours).in_range(1..24).with_low_message("must be at least 1").with_high_message("must be at most 24") }
+  it "should verify that hours is an integer" do
+    @valid_attributes.merge!(:hours => 0.1)
+    time_entry = TimeEntry.create(@valid_attributes)
+    time_entry.should have(1).error_on(:hours)
+  end
 end
