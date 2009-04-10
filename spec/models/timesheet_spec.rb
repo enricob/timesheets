@@ -18,8 +18,8 @@ describe Timesheet do
   it { should have_many(:time_entries) }
   
   it "should verify that start_date is a Monday" do
-    @valid_attributes.merge(:start_date => Date.new(2009,4,6))
-    timesheet = Timesheet.create!(@valid_attributes)
+    @valid_attributes.merge!(:start_date => Date.new(2009,4,10))
+    timesheet = Timesheet.create(@valid_attributes)
     timesheet.should have(1).error_on(:start_date)
   end
   
