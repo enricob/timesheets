@@ -1,0 +1,25 @@
+<% javascript :defaults, 'delegate' %>
+
+<%= error_messages_for :timesheet %>
+
+<% form_for(@timesheet) do |timesheet_form| %>
+
+  <% content_for :jstemplates do -%>
+    <%= "var time_entry='#{generate_template(timesheet_form, :time_entries)}'" %>
+  <% end -%>
+  
+  <%# No form fields for timesheet itself, so just render a table of entries %>
+  <table style="width: 80%" id="time_entries">
+    <tr>
+      <th style="text-align: left">Date</th>
+      <th style="text-align: left">Project</th>
+      <th style="text-align: left">Activity</th>
+      <th style="text-align: left">Hours</th>
+      <th style="text-align: left">Description</th>
+    </tr>
+    <% timesheet_form.fields_for :time_entries do |time_entry_form| %>
+      <%= render :partial => "time_entry", :locals => { :f => time_entry_form } %>
+    <% end %>
+  </table>
+  <%= link_to 'Add an entry', '#time_entry', :class => "add_nested_item", :rel => "time_entries" %>
+<% end %>
