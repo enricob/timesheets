@@ -18,4 +18,7 @@ describe TimeEntry do
   
   it { should belong_to(:timesheet) }
   it { should belong_to(:activity_type) }
+  it { should validate_presence_of(:activity_type) }
+  it { should validate_numericality_of(:hours) }
+  it { should ensure_inclusion_of(:hours).in_range(1..24).with_low_message("must be at least 1").with_high_message("must be at most 24") }
 end
