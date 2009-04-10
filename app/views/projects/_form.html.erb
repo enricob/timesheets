@@ -2,15 +2,15 @@
 
 <% form_for(@project) do |project_form| %>
   <p>
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
+    <%= project_form.label :name %><br />
+    <%= project_form.text_field :name %>
   </p>
   <p>
-    <%= f.label :description %><br />
-    <%= f.text_area :description %>
+    <%= project_form.label :description %><br />
+    <%= project_form.text_area :description %>
   </p>
   <p>
-    <%= f.submit 'Save' %>
+    <%= project_form.submit 'Save' %>
   </p>
   
   <div id="activity_types">
