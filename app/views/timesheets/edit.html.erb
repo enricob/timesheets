@@ -1,6 +1,6 @@
 <% title "Timesheets: Edit Timesheet" %>
 
-<h2>Week Starting <%= this_week.to_s(:long) %></h2>
+<h2>Week Starting <%= @date.to_s(:long) %></h2>
 
 <%= render :partial => "form" %>
 
