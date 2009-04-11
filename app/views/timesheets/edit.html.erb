@@ -8,3 +8,6 @@
   <%= link_to "Previous Week", "/timesheets/#{date_path(@date - 7.days)}" %> | 
   <%= link_to "Next Week", "/timesheets/#{date_path(@date + 7.days)}" %>
 </p>
+<p>
+  <%= link_to '&laquo; Back to "My Timesheets"', timesheets_path %>
+</p>
