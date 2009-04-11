@@ -1,7 +1,8 @@
 <tr class="time_entry">
   <td><%= f.collection_select :entry_date, week_array(@date), :to_time, :to_s %></td>
-  <td>Project selection goes here</td>
-  <td>ActivityTypes selection goes here</td>
+  <td><%= select_tag "project_#{f.object.id}",
+          options_from_collection_for_select(Project.all, 'id', 'name') %></td>
+  <td><%= f.collection_select :activity_type, ActivityType.all, :id, :name %></td>
   <td><%= f.text_field :hours %></td>
   <td><%= f.text_field :description %></td>
   <td><%= link_to "Remove", "#time_entry", :class => "remove" unless f.object.new_record? %></td>
