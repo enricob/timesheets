@@ -14,4 +14,13 @@ class TimesheetsController < ApplicationController
       @timesheet.time_entries.build
     end
   end
+  
+  def update
+    @timesheet = Timesheet.find(params[:id])
+    @date = @timesheet.start_date
+    if @timesheet.update_attributes(params[:timesheet])
+      flash[:notice] = 'Project was successfully updated.'
+    end
+    render :action => "edit"
+  end
 end
