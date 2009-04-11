@@ -21,6 +21,9 @@
     <%- end -%>
     
     <%= yield %>
+    <% unless controller_name == "user_sessions" %>
+      <p><%= link_to "Logout", logout_path %></p>
+    <% end %>
     </div>
   </body>
 </html>  
