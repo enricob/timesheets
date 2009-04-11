@@ -18,16 +18,20 @@ describe ProjectsController do
       route_for(:controller => "projects", :action => "edit", :id => "1").should == "/projects/1/edit"
     end
 
-  it "maps #create" do
-    route_for(:controller => "projects", :action => "create").should == {:path => "/projects", :method => :post}
-  end
+    it "maps #create" do
+      route_for(:controller => "projects", :action => "create").should == {:path => "/projects", :method => :post}
+    end
 
-  it "maps #update" do
-    route_for(:controller => "projects", :action => "update", :id => "1").should == {:path =>"/projects/1", :method => :put}
-  end
+    it "maps #update" do
+      route_for(:controller => "projects", :action => "update", :id => "1").should == {:path =>"/projects/1", :method => :put}
+    end
   
     it "maps #destroy" do
       route_for(:controller => "projects", :action => "destroy", :id => "1").should == {:path =>"/projects/1", :method => :delete}
+    end
+    
+    it "maps #get_activities_select" do
+      route_for(:controller => "projects", :action => "get_activities_select", :project_id => "37").should == "/projects/37/get_activities_select"
     end
   end
 
@@ -58,6 +62,10 @@ describe ProjectsController do
   
     it "generates params for #destroy" do
       params_from(:delete, "/projects/1").should == {:controller => "projects", :action => "destroy", :id => "1"}
+    end
+    
+    it "generates params for #get_activities_select" do
+      params_from(:get, "/projects/37/get_activities_select").should == {:controller => "projects", :action => "get_activities_select", :project_id => "37"}
     end
   end
 end
