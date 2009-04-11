@@ -5,8 +5,8 @@
    Project.first.id : f.object.activity_type.project.id -%>
   <td><%= select_tag "project_#{f.object.id}",
           options_from_collection_for_select(Project.all, 'id', 'name', selected_project) %></td>
-  <%= observe_field("project_#{f.object.id}", :function => "alert('Project Changed!')") %>
-  <td><%= f.collection_select :activity_type, ActivityType.all, :id, :name %></td>
+  <%= observe_field("project_#{f.object.id}", :function => "alert('Project Changed! (#{f.object.id})')") %>
+  <td><%= f.collection_select :activity_type_id, ActivityType.all, :id, :name %></td>
   <td><%= f.text_field :hours %></td>
   <td><%= f.text_field :description %></td>
   <td><%= link_to "Remove", "#time_entry", :class => "remove" unless f.object.new_record? %></td>
