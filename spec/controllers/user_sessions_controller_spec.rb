@@ -57,6 +57,11 @@ describe UserSessionsController do
           post :create, :user_session => {:login => "ben", :password => "benrocks", :remember_me => "0"}
           assert_not_nil assigns(:user_session)
         end
+        
+        it "redirects to the timesheets index" do
+          post :create, :user_session => {:login => "zack", :password => "zackrocks", :remember_me => "0"}
+          response.should redirect_to(timesheets_path)
+        end
       end
       describe "and incorrect credentials" do
         it "re-renders the login page" do
