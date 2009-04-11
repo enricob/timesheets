@@ -23,5 +23,10 @@
       <% end %>
     </tbody>
   </table>
-  <%= link_to 'Add an entry', '#time_entry', :class => "add_nested_item", :rel => "time_entries" %>
+  
+  <hr/>
+  
+  <p><%= link_to 'Add an entry', '#time_entry', :class => "add_nested_item",
+   :rel => "time_entries" %></p>
+  <p><%= timesheet_form.submit "Save" %>
 <% end %>

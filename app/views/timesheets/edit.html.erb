@@ -3,3 +3,8 @@
 <h2>Week Starting <%= this_week.to_s(:long) %></h2>
 
 <%= render :partial => "form" %>
+
+<p>
+  <%= link_to "Previous Week", "/timesheets/#{date_path(@date - 7.days)}" %> | 
+  <%= link_to "Next Week", "/timesheets/#{date_path(@date + 7.days)}" %>
+</p>
