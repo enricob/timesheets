@@ -17,10 +17,10 @@ class TimesheetsController < ApplicationController
   
   def update
     @timesheet = Timesheet.find(params[:id])
-    @date = @timesheet.start_date
+    @date = @timesheet.start_date.to_date
     if @timesheet.update_attributes(params[:timesheet])
       flash[:notice] = 'Project was successfully updated.'
     end
-    render :action => "edit"
+    redirect_to "#{timesheets_path}/#{@date.year}/#{@date.month}/#{@date.day}"
   end
 end
