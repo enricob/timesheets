@@ -19,4 +19,9 @@ describe "/timesheets/index.html.erb" do
     render
     response.should have_tag("a[href=?]", "#{projects_path}")
   end
+  
+  it "should contain a link to enter time against the current week" do
+    render
+    response.should have_tag("a[href=?]", "/timesheets/#{date_path(this_week)}")
+  end
 end
