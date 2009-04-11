@@ -85,4 +85,11 @@ class ProjectsController < ApplicationController
       format.xml  { head :ok }
     end
   end
+  
+  def get_activities_select
+    @project = Project.find(params[:project_id])
+    @form_id = params[:form_id]
+    @form_name = params[:form_name]
+    render :layout => false
+  end
 end

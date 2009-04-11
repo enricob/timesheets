@@ -1,4 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
+  map.connect '/projects/get_activities_select',
+   :controller => "projects", :action => "get_activities_select"
   map.resources :projects
 
   map.resource :account, :controller => "users", :except => [:index, :destroy]

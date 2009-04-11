@@ -8,6 +8,9 @@
     <%= "var time_entry='#{generate_template(timesheet_form, :time_entries)}'" %>
   <% end -%>
   
+  <%= timesheet_form.hidden_field :user_id, :value => @user.id %>
+  <%= timesheet_form.hidden_field :start_date, :value => @date %>
+  
   <%# No form fields for timesheet itself, so just render a table of entries %>
   <table style="width: 80%">
     <tr>

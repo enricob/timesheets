@@ -1,7 +1,7 @@
 class CreateTimesheets < ActiveRecord::Migration
   def self.up
     create_table :timesheets do |t|
-      t.datetime :start_date
+      t.date :start_date
       t.references :user
 
       t.timestamps

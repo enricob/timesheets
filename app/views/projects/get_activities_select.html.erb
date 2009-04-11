@@ -1,0 +1,3 @@
+<select id="<%= @form_id %>" name="<%= @form_name %>">
+  <%= options_from_collection_for_select(@project.activity_types, 'id', 'name') %>
+</select>

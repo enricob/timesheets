@@ -15,11 +15,20 @@ class TimesheetsController < ApplicationController
     end
   end
   
+  def create
+    @timesheet = Timesheet.new(params[:timesheet])
+    @date = @timesheet.start_date
+    if @timesheet.save
+      flash[:notice] = 'Timesheet was successfully saved.'
+    end
+    redirect_to "#{timesheets_path}/#{@date.year}/#{@date.month}/#{@date.day}"
+  end
+  
   def update
     @timesheet = Timesheet.find(params[:id])
-    @date = @timesheet.start_date.to_date
+    @date = @timesheet.start_date
     if @timesheet.update_attributes(params[:timesheet])
-      flash[:notice] = 'Project was successfully updated.'
+      flash[:notice] = 'Timesheet was successfully saved.'
     end
     redirect_to "#{timesheets_path}/#{@date.year}/#{@date.month}/#{@date.day}"
   end

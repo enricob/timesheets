@@ -37,7 +37,7 @@ ActiveRecord::Schema.define(:version => 20090410004750) do
   end
 
   create_table "timesheets", :force => true do |t|
-    t.datetime "start_date"
+    t.date     "start_date"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
