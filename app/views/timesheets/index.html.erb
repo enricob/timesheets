@@ -10,7 +10,7 @@
   <tr>
     <td><%=h timesheet.start_date.to_date.to_s(:long) %></td>
     <td><%=h timesheet.time_entries.inject(0) { |sum, t| sum + t.hours } %></td>
-    <td><%= link_to "Edit", "/timesheets/#{date_path(start_of_week(timesheet.start_date))}" %></td>
+    <td><%= link_to "Edit", "/timesheets/#{date_path(timesheet.start_date.beginning_of_week)}" %></td>
   </tr>
 <% end %>
 </table>

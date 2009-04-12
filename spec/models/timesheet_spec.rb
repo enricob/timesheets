@@ -18,15 +18,14 @@ describe Timesheet do
   it { should have_many(:time_entries) }
   
   it "should verify that start_date is a Monday" do
-    @valid_attributes.merge!(:start_date => Date.new(2009,4,10))
-    timesheet = Timesheet.create(@valid_attributes)
+    timesheet = Timesheet.create({:start_date => Date.new(2009,4,10)})
     timesheet.should have(1).error_on(:start_date)
   end
   
   it "should accept nested attributes values for time entries" do
     test_sheet = timesheets(:ben1)
     new_attributes = {:time_entries_attributes => [{:id => test_sheet.time_entries.first.id, :hours => "2"}]}
-    test_sheet.update_attributes!(new_attributes)
+    test_sheet.update_attributes(new_attributes)
     test_sheet.time_entries.first.hours.should == 2
   end
   

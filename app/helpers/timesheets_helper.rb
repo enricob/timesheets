@@ -3,13 +3,8 @@ module TimesheetsHelper
     "#{date.year}/#{date.month}/#{date.day}"
   end
   
-  def start_of_week(date)
-    offset = 1 - date.wday
-    date + offset.days
-  end
-  
   def this_week
-    start_of_week(Date.today)
+    Date.today.beginning_of_week
   end
   
   def week_array(date)

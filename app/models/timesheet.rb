@@ -5,6 +5,7 @@ class Timesheet < ActiveRecord::Base
   validate :starts_on_monday?
   
   def starts_on_monday?
-    errors.add(:start_date, "doesn't start on Monday") if self.start_date.wday != 1
+    date = self.start_date
+    errors.add(:start_date, "isn't a Monday") unless date.wday == 1
   end
 end
