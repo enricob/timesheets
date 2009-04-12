@@ -1,6 +1,6 @@
 require File.expand_path(File.dirname(__FILE__) + '/../../spec_helper')
 
-describe "/projects/get_activities_select.html.erb" do
+describe "/projects/activities_select.html.erb" do
   include ProjectsHelper
   
   before(:each) do

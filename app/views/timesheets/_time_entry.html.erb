@@ -8,7 +8,7 @@
   <td><%= select_tag "project_#{f.object.id}",
           options_from_collection_for_select(Project.all, 'id', 'name', selected_project) %></td>
   <%= observe_field "project_#{f.object.id}", 
-      :url => {:controller => "projects", :action => :get_activities_select },
+      :url => {:controller => "projects", :action => :activities_select },
       :update => "activity_type_#{f.object.id}",
       :with => "'project_id=' + value +
       '&form_id=timesheet_time_entries_attributes_#{form_id}_activity_type_id' +

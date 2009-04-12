@@ -121,34 +121,36 @@ describe ProjectsController do
     end
   end
   
-  describe "GET get_activities_select" do
+  describe "GET activities_select" do
     describe "with logged in user" do
       before(:each) do
         UserSession.create(users(:ben))
+        @form_id = "my_form_id"
+        @form_name = "my_form_name"
       end
       
       it "exposes the selected project as @project" do
         Project.should_receive(:find).with("37").and_return(mock_project)
-        get :get_activities_select, :project_id => "37"
+        get :activities_select, :project_id => "37", :form_id => @form_id, :form_name => @form_name
         assigns[:project].should equal(mock_project)
       end
       
       it "exposes form_id as @form_id" do
         Project.should_receive(:find).with("37").and_return(mock_project)
-        get :get_activities_select, :project_id => "37", :form_id => "my_form_id"
-        assigns[:form_id].should == "my_form_id"
+        get :activities_select, :project_id => "37", :form_id => @form_id, :form_name => @form_name
+        assigns[:form_id].should == @form_id
       end
       
       it "exposes form_name as @form_name" do
         Project.should_receive(:find).with("37").and_return(mock_project)
-        get :get_activities_select, :project_id => "37", :form_name => "my_form_name"
-        assigns[:form_name].should == "my_form_name"
+        get :activities_select, :project_id => "37", :form_id => @form_id, :form_name => @form_name
+        assigns[:form_name].should == @form_name
       end
     end
     
     describe "with no logged in user" do
       it "redirects to the login page" do
-        get :get_activities_select, :project_id => "37"
+        get :activities_select, :project_id => "37", :form_id => @form_id, :form_name => @form_name
         response.should redirect_to(new_user_session_url)
       end
     end

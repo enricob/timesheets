@@ -30,8 +30,8 @@ describe ProjectsController do
       route_for(:controller => "projects", :action => "destroy", :id => "1").should == {:path =>"/projects/1", :method => :delete}
     end
     
-    it "maps #get_activities_select" do
-      route_for(:controller => "projects", :action => "get_activities_select", :project_id => "37").should == "/projects/37/get_activities_select"
+    it "maps #activities_select" do
+      route_for(:controller => "projects", :action => "activities_select").should == "/projects/activities_select"
     end
   end
 
@@ -64,8 +64,8 @@ describe ProjectsController do
       params_from(:delete, "/projects/1").should == {:controller => "projects", :action => "destroy", :id => "1"}
     end
     
-    it "generates params for #get_activities_select" do
-      params_from(:get, "/projects/37/get_activities_select").should == {:controller => "projects", :action => "get_activities_select", :project_id => "37"}
+    it "generates params for #activities_select" do
+      params_from(:get, "/projects/activities_select").should == {:controller => "projects", :action => "activities_select"}
     end
   end
 end
