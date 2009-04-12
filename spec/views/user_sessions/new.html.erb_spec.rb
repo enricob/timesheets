@@ -3,8 +3,6 @@ require File.expand_path(File.dirname(__FILE__) + '/../../spec_helper')
 require 'authlogic/test_case'
 
 describe "/user_sessions/new.html.erb" do
-  include UserSessionsHelper
-  
   before(:each) {
     activate_authlogic
     assigns[:user_session] = @user_session = UserSession.new
