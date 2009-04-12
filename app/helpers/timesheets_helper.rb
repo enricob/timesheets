@@ -8,7 +8,7 @@ module TimesheetsHelper
   end
   
   def week_array(date)
-    start = start_of_week(date)
-    (start...start+7).to_a
+    start = date.beginning_of_week
+    (start...start + 7.days).to_a
   end
 end

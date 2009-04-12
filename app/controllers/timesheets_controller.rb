@@ -18,6 +18,7 @@ class TimesheetsController < ApplicationController
       @timesheet.time_entries.build
     end
     respond_to do |format|
+      format.html # edit.html.erb
       format.xml { render :xml => @timesheet }
     end
   end
