@@ -12,7 +12,7 @@ describe "/timesheets/index.html.erb" do
   it "should render the user's timesheets" do
     render
     response.should have_tag("tr>td", "April  6, 2009")
-    response.should have_tag("tr>td", "8")
+    response.should have_tag("tr>td", "8.0")
   end
   
   it "should contain a link to manage projects" do
