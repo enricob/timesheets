@@ -3,12 +3,17 @@ require File.expand_path(File.dirname(__FILE__) + '/../../spec_helper')
 describe "/timesheets/edit.html.erb" do
   include TimesheetsHelper
   
+  dataset :time_entries
+  # I don't like having view specs interact with the database but trying to stub out
+  # all of the involved models is an exercise in pain and anguish.
+  
   before(:each) do
-    assigns[:timesheet] = @timesheet = stub_model(Timesheet,
-      :start_date => Date.new(2009, 4, 13))
     assigns[:date] = @date = Date.new(2009, 4, 13)
-    @timesheet.time_entries.create(:entry_date => @date)
     assigns[:user] = @user = stub_model(User, {:login => "test_user"})
+    assigns[:timesheet] = @timesheet = stub_model(Timesheet,
+      :start_date => @date,
+      :user => @user,
+      :time_entries => [time_entries(:zack2)])
   end
   
   it "shows the current date" do

@@ -40,4 +40,11 @@ describe Timesheet do
     timesheets(:ben1).destroy
     TimeEntry.all.length.should == 2
   end
+  
+  it "should not allow days to be overcharged (> 24 hours)" do
+    test_sheet = timesheets(:zack1)
+    test_sheet.time_entries.create(:entry_date => Date.new(2009,4,14),
+      :activity_type_id => activity_types(:planning).id, :hours => 20, :description => "Long shift!")
+    test_sheet.save.should == false
+  end
 end
