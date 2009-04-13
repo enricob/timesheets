@@ -3,7 +3,7 @@
 <%- form_id = f.hidden_field(:id).match("time_entries_attributes_(([0-9]+|NEW_RECORD))")[1] -%>
 
 <tr class="time_entry" id="time_entry-<%=f.object.id%>">
-  <td><%= f.collection_select :entry_date, week_array(@date), :to_time, :to_s %></td>
+  <td><%= f.collection_select :entry_date, week_array(@date), :to_date, :to_s %></td>
   
   <%- selected_project = f.object.new_record? ?
    Project.first.id : f.object.activity_type.project.id -%>

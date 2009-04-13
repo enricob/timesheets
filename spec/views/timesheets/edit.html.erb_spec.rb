@@ -22,7 +22,7 @@ describe "/timesheets/edit.html.erb" do
       "timesheet_time_entries_attributes_0_entry_date",
       "timesheet[time_entries_attributes][0][entry_date]")
     for d in (@date...@date+7) do
-      response.should have_tag("option[value=?]", d.to_time)
+      response.should have_tag("option[value=?]", d.to_s)
     end
   end
   
