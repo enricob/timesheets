@@ -6,10 +6,6 @@ describe TimesheetsController do
       route_for(:controller => "timesheets", :action => "index").should == "/timesheets"
     end
     
-    it "maps #edit" do
-      route_for(:controller => "timesheets", :action => "edit", :id => "1").should == "/timesheets/1/edit"
-    end
-    
     it "maps #create" do
       route_for(:controller => "timesheets", :action => "create").should == {:path => "/timesheets", :method => :post}
     end
@@ -26,10 +22,6 @@ describe TimesheetsController do
     
     it "generates params for #index" do
       params_from(:get, '/timesheets').should == {:controller => "timesheets", :action => "index"}
-    end
-    
-    it "generates params for #edit" do
-      params_from(:get, '/timesheets/1/edit').should == {:controller => "timesheets", :action => "edit", :id => "1"}
     end
     
     it "generates params for #edit given date" do

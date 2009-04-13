@@ -6,7 +6,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resource :account, :controller => "users", :except => [:index, :destroy]
   map.resources :users, :except => [:index, :destroy]
   
-  map.resources :timesheets
+  map.resources :timesheets, :only => [:index, :create, :update]
   map.connect '/timesheets/:year/:month/:day', :controller => "timesheets", :action => "edit"
 
   map.login '/login', :controller => "user_sessions", :action => "new"
