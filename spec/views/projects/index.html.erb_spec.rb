@@ -19,5 +19,10 @@ describe "/projects/index.html.erb" do
     response.should have_tag("tr>td", "value for name".to_s, 2)
     response.should have_tag("tr>td", "value for description".to_s, 2)
   end
+  
+  it "renders a link back to timesheets" do
+    render
+    response.should have_tag("a[href=#{timesheets_path}]")
+  end
 end
 

@@ -12,7 +12,6 @@ describe "/projects/new.html.erb" do
 
   it "renders new project form" do
     render
-    
     response.should have_tag("form[action=?][method=post]", projects_path) do
       with_tag("input#project_name[name=?]", "project[name]")
       with_tag("textarea#project_description[name=?]", "project[description]")
@@ -21,13 +20,17 @@ describe "/projects/new.html.erb" do
   
   it "renders the activity type fields for a new record" do
     render
-    
     response.should have_tag("div#activity_types") do
       with_tag('input#project_activity_types_attributes_0_name[name=?]',
         "project[activity_types_attributes][0][name]")
       with_tag('input#project_activity_types_attributes_0_description[name=?]',
         "project[activity_types_attributes][0][description]")
     end
+  end
+  
+  it "renders a link back to timesheets" do
+    render
+    response.should have_tag("a[href=#{timesheets_path}]")
   end
 end
 

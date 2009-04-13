@@ -20,5 +20,10 @@ describe "/projects/show.html.erb" do
     response.should have_text(/Some\ Activity/)
     response.should have_text(/Some\ Description/)
   end
+  
+  it "renders a link back to timesheets" do
+    render
+    response.should have_tag("a[href=#{timesheets_path}]")
+  end
 end
 
