@@ -1,20 +1,28 @@
 <%# The form helper doesn't give us any way of knowing what it will name its attributes, so 
     we'll just hack it out in this rather nasty manner %>
 <%- form_id = f.hidden_field(:id).match("time_entries_attributes_(([0-9]+|NEW_RECORD))")[1] -%>
+
 <tr class="time_entry" id="time_entry-<%=f.object.id%>">
   <td><%= f.collection_select :entry_date, week_array(@date), :to_time, :to_s %></td>
+  
   <%- selected_project = f.object.new_record? ?
    Project.first.id : f.object.activity_type.project.id -%>
+   
   <td><%= select_tag "project_#{f.object.id}",
           options_from_collection_for_select(Project.all, 'id', 'name', selected_project) %></td>
+          
   <%= observe_field "project_#{f.object.id}", 
       :url => {:controller => "projects", :action => :activities_select },
       :update => "activity_type_#{f.object.id}",
       :with => "'project_id=' + value +
       '&form_id=timesheet_time_entries_attributes_#{form_id}_activity_type_id' +
       '&form_name=timesheet[time_entries_attributes][#{form_id}][activity_type_id]'" %>
+      
   <td id="activity_type_<%=f.object.id%>"><%= f.collection_select :activity_type_id, Project.find(selected_project).activity_types, :id, :name %></td>
+  
   <td><%= f.text_field :hours %></td>
+  
   <td><%= f.text_field :description %></td>
+  
   <td><%= link_to "Remove", "#time_entry", :class => "remove" unless f.object.new_record? %></td>
 </tr>
