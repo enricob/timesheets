@@ -1,4 +1,6 @@
 class TimesheetsController < ApplicationController
+  include TimesheetsHelper
+  
   before_filter :require_user
   
   def index
@@ -29,10 +31,10 @@ class TimesheetsController < ApplicationController
     respond_to do |format|
       if @timesheet.save
         flash[:notice] = 'Timesheet was successfully saved.'
-        format.html { redirect_to "#{timesheets_path}/#{@date.year}/#{@date.month}/#{@date.day}" }
+        format.html { redirect_to "#{timesheets_path}/#{date_path(@date)}" }
         format.xml { render :xml => @timesheet, :status => :created, :location => @timesheet }
       else
-        format.html { redirect_to "#{timesheets_path}/#{@date.year}/#{@date.month}/#{@date.day}" }
+        format.html { redirect_to "#{timesheets_path}/#{date_path(@date)}" }
         format.xml  { render :xml => @timesheet.errors, :status => :unprocessable_entity }
       end
     end
@@ -44,10 +46,10 @@ class TimesheetsController < ApplicationController
     respond_to do |format|
       if @timesheet.update_attributes(params[:timesheet])
         flash[:notice] = 'Timesheet was successfully saved.'
-        format.html { redirect_to "#{timesheets_path}/#{@date.year}/#{@date.month}/#{@date.day}" }
+        format.html { redirect_to "#{timesheets_path}/#{date_path(@date)}" }
         format.xml { head :ok }
       else
-        format.html { redirect_to "#{timesheets_path}/#{@date.year}/#{@date.month}/#{@date.day}" }
+        format.html { redirect_to "#{timesheets_path}/#{date_path(@date)}" }
         format.xml  { render :xml => @timesheet.errors, :status => :unprocessable_entity }
       end
     end
