@@ -56,6 +56,16 @@ describe TimesheetsController do
         get :edit, :year => @date.year, :month => @date.month, :day => @date.day
         assigns[:date].should == @date
       end
+      
+      it "gives a 404 error for a bad date" do
+        get :edit, :year => 99, :month => 99, :day => 99
+        response.status.should == "404 Not Found"
+      end
+      
+      it "gives a 404 error for a date that isn't a Monday" do
+        get :edit, :year => 2009, :month => 4, :day => 10
+        response.status.should == "404 Not Found"
+      end
   
       it "creates a new timesheet if the user doesn't have one for the given date" do
         Timesheet.should_receive(:new).with(hash_including(:start_date => @date, :user => users(:zack))).and_return(mock_timesheet)
@@ -66,7 +76,7 @@ describe TimesheetsController do
       end
       
       it "retrieve's the user's timesheet for that date if there is one" do
-        @date = Date.new(2006, 4, 13)
+        @date = Date.new(2009, 4, 13)
         Timesheet.should_receive(:scoped_by_user_id).with(users(:zack).id).and_return(mock_array = [])
         mock_array.should_receive(:find_by_start_date).with(@date).and_return(mock_timesheet)
         get :edit, :year => @date.year, :month => @date.month, :day => @date.day

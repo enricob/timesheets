@@ -13,12 +13,22 @@ class TimesheetsController < ApplicationController
   
   def edit
     @user = @current_user
-    @date = Date.new(params[:year].to_i, params[:month].to_i, params[:day].to_i)
+    
+    begin
+      @date = Date.new(params[:year].to_i, params[:month].to_i, params[:day].to_i)
+      return render :file => "#{RAILS_ROOT}/public/404.html",  
+        :status => 404 unless @date == @date.beginning_of_week
+    rescue ArgumentError
+      return render :file => "#{RAILS_ROOT}/public/404.html", :status => 404
+    end
+ 
     @timesheet = Timesheet.scoped_by_user_id(@user.id).find_by_start_date(@date)
+    
     unless @timesheet
       @timesheet = Timesheet.new({:user => @user, :start_date => @date})
       @timesheet.time_entries.build
     end
+    
     respond_to do |format|
       format.html # edit.html.erb
       format.xml { render :xml => @timesheet }
