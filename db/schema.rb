@@ -28,9 +28,9 @@ ActiveRecord::Schema.define(:version => 20090410004750) do
 
   create_table "time_entries", :force => true do |t|
     t.integer  "timesheet_id"
-    t.datetime "entry_date"
+    t.date     "entry_date"
     t.integer  "activity_type_id"
-    t.integer  "hours"
+    t.float    "hours"
     t.string   "description"
     t.datetime "created_at"
     t.datetime "updated_at"

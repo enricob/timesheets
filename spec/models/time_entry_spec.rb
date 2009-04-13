@@ -20,9 +20,14 @@ describe TimeEntry do
   it { should belong_to(:activity_type) }
   it { should validate_presence_of(:activity_type).with_message("must be selected") }
   it { should validate_numericality_of(:hours) }
-  it "should verify that hours is an integer" do
-    time_entry = time_entries(:ben1)
-    time_entry.update_attributes({:hours => 0.1})
-    time_entry.should have(1).error_on(:hours)
+  
+  it "should not allow hours to be less than or equal to 0" do
+    test_entry = TimeEntry.create(@valid_attributes.merge({:hours => -1.0}))
+    test_entry.should have(1).error_on(:hours)
+  end
+  
+  it "should not allow hours to be greater than or equal to 0" do
+    test_entry = TimeEntry.create(@valid_attributes.merge({:hours => 26}))
+    test_entry.should have(1).error_on(:hours)
   end
 end

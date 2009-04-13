@@ -4,7 +4,7 @@ class CreateTimeEntries < ActiveRecord::Migration
       t.references :timesheet
       t.date :entry_date
       t.references :activity_type
-      t.integer :hours
+      t.float :hours
       t.string :description
 
       t.timestamps
