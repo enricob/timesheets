@@ -1,4 +1,6 @@
 class TimeEntry < ActiveRecord::Base
+  default_scope :order => 'entry_date ASC'
+  
   belongs_to :timesheet
   belongs_to :activity_type
   

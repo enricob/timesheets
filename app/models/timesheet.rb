@@ -1,4 +1,6 @@
 class Timesheet < ActiveRecord::Base
+  default_scope :order => "start_date DESC"
+  
   belongs_to :user
   has_many :time_entries, :dependent => :destroy
   accepts_nested_attributes_for :time_entries, :allow_destroy => true
