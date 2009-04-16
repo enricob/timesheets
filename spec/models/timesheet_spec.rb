@@ -47,4 +47,8 @@ describe Timesheet do
       :activity_type_id => activity_types(:planning).id, :hours => 20, :description => "Long shift!")
     test_sheet.save.should == false
   end
+  
+  it "should return queries in descending order of start_date by default" do
+    Timesheet.all.should == Timesheet.find(:all, :order => "start_date DESC")
+  end
 end
