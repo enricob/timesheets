@@ -1,14 +1,6 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
-require 'authlogic/test_case'
-
 describe ProjectsController do
-  dataset :users
-  
-  before(:each) do
-    activate_authlogic
-  end
-  
   def mock_activity_type(stubs={})
     @mock_activity_type ||= mock_model(ActivityType, stubs)
   end
@@ -17,10 +9,14 @@ describe ProjectsController do
     @mock_project ||= mock_model(Project, stubs)
   end
   
+  def login_a_user
+    controller.stub!(:current_user).and_return(mock_model(User))
+  end
+  
   describe "GET index" do 
     describe "with logged in user" do
       before(:each) do
-        UserSession.create(users(:ben))
+        login_a_user
       end
     
       it "exposes all projects as @projects" do
@@ -50,7 +46,7 @@ describe ProjectsController do
   describe "GET show" do
     describe "with logged in user" do
       before(:each) do
-        UserSession.create(users(:zack))
+        login_a_user
       end
 
       it "exposes the requested project as @project" do
@@ -80,7 +76,7 @@ describe ProjectsController do
   describe "GET new" do
     describe "with logged in user" do
       before(:each) do
-        UserSession.create(users(:ben))
+        login_a_user
       end
     
       it "exposes a new project as @project with a blank activity type" do
@@ -103,7 +99,7 @@ describe ProjectsController do
   describe "GET edit" do
     describe "with logged in user" do
       before(:each) do
-        UserSession.create(users(:zack))
+        login_a_user
       end
   
       it "exposes the requested project as @project" do
@@ -124,7 +120,7 @@ describe ProjectsController do
   describe "GET activities_select" do
     describe "with logged in user" do
       before(:each) do
-        UserSession.create(users(:ben))
+        login_a_user
         @form_id = "my_form_id"
         @form_name = "my_form_name"
       end
@@ -159,7 +155,7 @@ describe ProjectsController do
   describe "POST create" do
     describe "with logged in user" do
       before(:each) do
-        UserSession.create(users(:zack))
+        login_a_user
       end
 
       describe "with valid params" do
@@ -202,7 +198,7 @@ describe ProjectsController do
   describe "PUT update" do
     describe "with logged in user" do
       before(:each) do
-        UserSession.create(users(:ben))
+        login_a_user
       end
 
       describe "with valid params" do
@@ -257,7 +253,7 @@ describe ProjectsController do
   describe "DELETE destroy" do
     describe "with logged in user" do
       before(:each) do
-        UserSession.create(users(:zack))
+        login_a_user
       end
 
       it "destroys the requested project" do
