@@ -14,7 +14,7 @@ class Timesheet < ActiveRecord::Base
   def no_overcharged_days
     date = self.start_date
     for d in (date...date + 7.days) do
-      entries_for_date = self.time_entries.select { |t| t.entry_date == d }
+      entries_for_date = self.time_entries.select { |t| t.valid? && t.entry_date == d }
       hours_for_date = entries_for_date.inject(0) { |sum, t| sum + t.hours }
       errors.add_to_base("#{date} has more than 24 hours logged") unless hours_for_date <= 24
     end

@@ -17,6 +17,7 @@ describe Project do
   it { should validate_presence_of(:name) }
   it { should validate_uniqueness_of(:name) }
   it { should have_many(:activity_types) }
+  it { should have_many(:time_entries).through(:activity_types) }
   
   it "should accept nested attributes values for activity types" do
     test_proj = projects(:project_x)
