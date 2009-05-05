@@ -24,5 +24,5 @@
   
   <td><%= f.text_field :description %></td>
   
-  <td><%= link_to "Remove", "#time_entry", :class => "remove" unless f.object.new_record? %></td>
+  <td><%= remove_link_unless_new_record(f) %></td>
 </tr>

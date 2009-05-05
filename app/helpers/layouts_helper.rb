@@ -51,4 +51,11 @@ module LayoutsHelper
   def generate_template(form_builder, method, options = {})
     escape_javascript generate_html(form_builder, method, options = {})
   end
+  
+  def remove_link_unless_new_record(fields)
+    out = ''
+    out << fields.hidden_field(:_delete)  unless fields.object.new_record?
+    out << link_to("remove", "##{fields.object.class.name.underscore}", :class => 'remove')
+    out
+  end
 end
